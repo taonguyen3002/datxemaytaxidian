@@ -183,7 +183,7 @@ export default function SettingPage() {
 
                   const pastedText = e.clipboardData.getData("text");
 
-                  const prefix = `${siteConfig.domain}/bai-viet/`;
+                  const prefix = `${siteConfig.domain}/`;
 
                   let newSlug = pastedText;
 

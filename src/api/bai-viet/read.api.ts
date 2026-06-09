@@ -18,7 +18,7 @@ export async function getPost(slug: string) {
       next: { revalidate: 2592000 }, // 👈 ISR: cache 24h
       headers: {
         "Content-Type": "application/json",
-        Origin: "https://datxemaytaxidian.com" ?? siteConfig.domain ?? process.env.NEXT_PUBLIC_BASE_URL,
+        Origin: process.env.NEXT_PUBLIC_BASE_URL ?? siteConfig.domain,
       },
     });
 
@@ -72,7 +72,7 @@ async function getAllPosts(limit?: number) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Origin: "https://datxemaytaxidian.com" ?? siteConfig.domain ?? process.env.NEXT_PUBLIC_BASE_URL,
+        Origin: process.env.NEXT_PUBLIC_BASE_URL ?? siteConfig.domain,
       },
       // ✅ ISR: cache và revalidate sau 1 thang
       next: { revalidate: 2592000, tags: ["getallpost"] },
@@ -107,7 +107,7 @@ async function getFilterTagsPosts(tags: string[], limit?: number) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Origin: "https://datxemaytaxidian.com" ?? siteConfig.domain ?? process.env.NEXT_PUBLIC_BASE_URL,
+        Origin: process.env.NEXT_PUBLIC_BASE_URL ?? siteConfig.domain,
       },
       body: JSON.stringify({ tags }),
       // ✅ ISR: cache và revalidate sau 1 thang

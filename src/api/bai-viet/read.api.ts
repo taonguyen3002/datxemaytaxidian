@@ -12,13 +12,13 @@ type GetPostslicePage = {
 };
 export async function getPost(slug: string) {
   try {
-    const url = `${process.env.NEXT_PUBLIC_API_URL ?? "https://datxecongnghe.io.vn"}/api/posts/${slug}`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL ?? "https://api.taxinhanh247.pro.vn"}/api/posts/${slug}`;
 
     const response = await fetch(url, {
       next: { revalidate: 2592000 }, // 👈 ISR: cache 24h
       headers: {
         "Content-Type": "application/json",
-        Origin: process.env.NEXT_PUBLIC_BASE_URL ?? siteConfig.domain,
+        Origin: siteConfig.domain ?? process.env.NEXT_PUBLIC_BASE_URL,
       },
     });
 
@@ -72,7 +72,7 @@ async function getAllPosts(limit?: number) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Origin: process.env.NEXT_PUBLIC_BASE_URL ?? siteConfig.domain,
+        Origin: siteConfig.domain ?? process.env.NEXT_PUBLIC_BASE_URL,
       },
       // ✅ ISR: cache và revalidate sau 1 thang
       next: { revalidate: 2592000, tags: ["getallpost"] },
@@ -107,7 +107,7 @@ async function getFilterTagsPosts(tags: string[], limit?: number) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Origin: process.env.NEXT_PUBLIC_BASE_URL ?? siteConfig.domain,
+        Origin: siteConfig.domain ?? process.env.NEXT_PUBLIC_BASE_URL,
       },
       body: JSON.stringify({ tags }),
       // ✅ ISR: cache và revalidate sau 1 thang

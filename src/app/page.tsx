@@ -68,59 +68,105 @@ export default function Home() {
       <Header />
       {/* Main content */}
       <main>
-        <Container className="mt-5 mb-5">
+        <Container className="mt-4 md:mt-6 mb-4 md:mb-8">
           <SlideHero />
         </Container>
+
         {/* Introduction Section */}
         <Container>
           <TaxiServiceIntro />
         </Container>
-        <Container>
-          <PriceTable />
-        </Container>
-        <Container>
-          <About1 />
-        </Container>
-        {/* Feature Section */}
-        <Container
-          sx={{
-            paddingTop: { xs: "5px", md: "10px" },
-            paddingBottom: "20px",
-            marginTop: { xs: "5px", md: "10px" },
-          }}
-        >
-          <Grid container spacing={2}>
+
+        {/* Feature Section - Professional Design */}
+        <Container sx={{ py: { xs: 3, md: 6 } }}>
+          <Box sx={{ mb: 4 }}>
+            <Typography
+              variant="h3"
+              sx={{
+                fontWeight: "bold",
+                textAlign: "center",
+                color: "#1f2937",
+                mb: 1,
+              }}
+            >
+              Tại Sao Chọn Chúng Tôi?
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                textAlign: "center",
+                color: "#6b7280",
+                maxWidth: "600px",
+                mx: "auto",
+              }}
+            >
+              Chúng tôi cam kết cung cấp dịch vụ tốt nhất với giá cạnh tranh
+            </Typography>
+          </Box>
+
+          <Grid container spacing={3}>
             {featureData.map((feature: Feature, index: number) => (
-              <Grid key={index} sx={{ flex: "1 0 auto" }} item xs={12} md={3}>
+              <Grid key={index} item xs={12} sm={6} md={3}>
                 <Box
                   sx={{
-                    background: "#5a5afb",
+                    background: "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexDirection: "column",
-                    padding: "5px 10px 0",
+                    padding: "30px 20px",
                     color: "#fff",
                     height: "100%",
                     width: "100%",
+                    borderRadius: "16px",
+                    transition: "all 0.3s ease",
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+                    "&:hover": {
+                      transform: "translateY(-8px)",
+                      boxShadow: "0 20px 40px rgba(37, 99, 235, 0.3)",
+                    },
                   }}
                 >
-                  <Image
-                    src={feature.src}
-                    alt={feature.alt}
-                    width={60}
-                    height={60}
-                    style={{ objectFit: "cover" }}
-                  />
+                  <Box
+                    sx={{
+                      position: "relative",
+                      width: 70,
+                      height: 70,
+                      mb: 2,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      bgcolor: "rgba(255,255,255,0.2)",
+                      borderRadius: "12px",
+                    }}
+                  >
+                    <Image
+                      src={feature.src}
+                      alt={feature.alt}
+                      width={50}
+                      height={50}
+                      style={{ objectFit: "contain" }}
+                    />
+                  </Box>
                   <Box sx={{ textAlign: "center" }}>
                     <Typography
                       variant="h6"
-                      sx={{ marginTop: "10px" }}
-                      gutterBottom
+                      sx={{
+                        marginBottom: "10px",
+                        fontWeight: "bold",
+                        fontSize: "16px",
+                      }}
                     >
                       {feature.title}
                     </Typography>
-                    <Typography variant="body1" gutterBottom>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        fontSize: "14px",
+                        lineHeight: "1.6",
+                        opacity: 0.95,
+                      }}
+                    >
                       {feature.desc}
                     </Typography>
                   </Box>
@@ -129,10 +175,20 @@ export default function Home() {
             ))}
           </Grid>
         </Container>
+
+        <Container>
+          <PriceTable />
+        </Container>
+
+        <Container>
+          <About1 />
+        </Container>
+
         {/* BookingGuide  */}
         <Container>
           <BookingGuide />
         </Container>
+
         {/* Main Content */}
         <Container>
           <ServiceList />
@@ -142,39 +198,33 @@ export default function Home() {
         <Container>
           <StaticSection />
         </Container>
+
         {/* Featured Drivers Section */}
         <Container>
           <TopDrivers />
         </Container>
-        <Container sx={{ mx: "auto", px: { xs: 2, md: 0 }, mt: 4, mb: 4 }}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Link href={"/bai-viet"}>
+
+        {/* Blog Section */}
+        <Container sx={{ mx: "auto", px: { xs: 2, md: 0 }, mt: 6, mb: 6 }}>
+          <Box sx={{ mb: 4 }}>
+            <Link href={"/bai-viet"} style={{ textDecoration: "none" }}>
               <Typography
                 variant="h3"
                 sx={{
                   fontWeight: "bold",
-                  backgroundImage: "linear-gradient(90deg, #FFD700, #32CD32)",
-                  backgroundClip: "text",
-                  WebkitBackgroundClip: "text",
-                  color: "transparent",
+                  color: "#1f2937",
+                  "&:hover": {
+                    color: "#2563eb",
+                  },
                 }}
-                gutterBottom
               >
                 Bài Viết Gần Nhất
               </Typography>
             </Link>
           </Box>
-          <GetReviewBlogsWithTags
-            tags={siteConfig.keywords.split(",")}
-            limit={16}
-          />
+          <GetReviewBlogsWithTags tags={siteConfig.keywords.split(",")} limit={16} />
         </Container>
+
         <LabelBottomNavigation />
         <ActionButton />
         <TrackUserLocation />
